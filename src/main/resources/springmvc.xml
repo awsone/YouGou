@@ -9,10 +9,27 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<dubbo:application name="dubboxdemo_service" />
+
+	<!-- 转化器，输出的值变成字符串 <mvc:annotation-driven > <mvc:message-converters register-defaults="false"> 
+		<bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
+		<constructor-arg value="UTF-8" /> </bean> </mvc:message-converters> </mvc:annotation-driven> -->
+
+
+	<mvc:annotation-driven>
+
+		<mvc:message-converters register-defaults="false">
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+		</mvc:message-converters>
+
+
+
+	</mvc:annotation-driven>
+	<dubbo:application name="dubboxdemo_web" />
 	<!-- 注册器的地址 -->
 	<dubbo:registry address="zookeeper://192.168.25.128:2181" />
 	<!-- 扫描包 -->
-	<dubbo:annotation package="com.zc.demo.serviceImpl" />
+	<dubbo:annotation package="com.zc.demo.controller" />
 
 </beans>
